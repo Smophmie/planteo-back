@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
 
@@ -45,18 +47,6 @@ class UserController extends Controller
             'user'=>$user,
             'token'=>$token,
         ]);
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required',
-            'is_admin' => 'required',
-            'password' => 'required'
-        ]);
-        User::create($request->all());
-        return "Utilisateur créé avec succès";
     }
 
     public function login(Request $request)
@@ -114,6 +104,41 @@ class UserController extends Controller
           $user = User::find($id);
           $user->update($request->all());
           return "L'utilisateur a été mis à jour";
+    }
+
+    public function connectedUser()
+    {
+        $user = Auth::user();
+        return $user;
+    }
+
+    public function isAdmin()
+    {
+        $user = Auth::user();
+        if ($user->admin === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        $user = Auth::user();
+
+        if ($user) {
+            $user->tokens()->delete();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Logout successful',
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'User not authenticated',
+        ], 401);
     }
 
     public function destroy(string $id)
