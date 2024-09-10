@@ -40,13 +40,22 @@ class UserController extends Controller
                 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]+$/',                
                 'confirmed'
             ],
+            'password_confirmation' => 'required',
         ]);
-        $user = User::create($request->all());
-        $token = $user->createToken("API TOKEN")->plainTextToken;
-        return response()->json([
-            'user'=>$user,
-            'token'=>$token,
-        ]);
+        try {
+            $user = User::create($validatedData);
+            $token = $user->createToken("API TOKEN")->plainTextToken;
+    
+            return response()->json([
+                'user' => $user,
+                'token' => $token,
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'La création de compte n\'a pas fonctionné!',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function login(Request $request)
