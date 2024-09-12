@@ -12,6 +12,8 @@ use App\Http\Controllers\PlantController;
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
+Route::post('/logout', [UserController::class, 'login']);
+
 
 
 Route::get('/isadmin', [UserController::class, 'isAdmin']);
