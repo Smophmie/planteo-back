@@ -133,8 +133,8 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
+        dump('ok');
         $user = Auth::user();
-
         if ($user) {
             $user->tokens()->delete();
 
