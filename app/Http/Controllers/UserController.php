@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|max:255',
             'email' => [
                 'required', 
