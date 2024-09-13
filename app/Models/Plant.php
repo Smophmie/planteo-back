@@ -12,6 +12,7 @@ class Plant extends Model
     protected $fillable = [
         'name',
         'type',
+        'description',
         'sowing_period',
         'planting_period',
         'harvest_period',

@@ -18,6 +18,7 @@ class PlantController extends Controller
         $request->validate([
             'name' => 'required',
             'type' => 'nullable|string|max:255',
+            'description' => 'required|string',
             'sowing_period' => 'nullable|string|max:255',
             'planting_period' => 'nullable|string|max:255',
             'harvest_period' => 'required|string|max:255',
@@ -53,6 +54,7 @@ class PlantController extends Controller
         $request->validate([
             'name' => 'required',
             'type' => 'nullable|string|max:255',
+            'description' => 'required|string',
             'sowing_period' => 'nullable|string|max:255',
             'planting_period' => 'nullable|string|max:255',
             'harvest_period' => 'required|string|max:255',

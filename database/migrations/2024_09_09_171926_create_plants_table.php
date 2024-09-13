@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('type');
+            $table->string('description');
             $table->string('sowing_period');
             $table->string('planting_period');
             $table->string('harvest_period');
