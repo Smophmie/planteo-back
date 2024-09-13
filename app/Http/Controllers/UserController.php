@@ -31,9 +31,6 @@ class UserController extends Controller
                 'email',
                 'unique:users,email'
             ],
-            'is_admin' => [
-                'required'
-            ],
             'password' => [
                 'required', 
                 'min:8',
