@@ -9,7 +9,7 @@ class PlantController extends Controller
 {
     public function index()
     {
-        $plants = Plant::all();
+        $plants = Plant::orderBy('name', 'asc')->get();
         return $plants;
     }
 
