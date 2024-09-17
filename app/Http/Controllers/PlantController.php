@@ -17,6 +17,7 @@ class PlantController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'image' => 'nullable|image',
             'type' => 'nullable|string|max:255',
             'description' => 'required|string',
             'sowing_period' => 'nullable|string|max:255',
@@ -32,12 +33,17 @@ class PlantController extends Controller
         ]);
 
         if (!$request->filled('sowing_period') && !$request->filled('planting_period')) 
-            {
-            return back()->withErrors([
-                'sowingPeriod' => 'Either sowing period or planting period must be provided.',
-                'plantingPeriod' => 'Either sowing period or planting period must be provided.'
-            ])->withInput();
-            }
+        {
+        return back()->withErrors([
+            'sowingPeriod' => 'Either sowing period or planting period must be provided.',
+            'plantingPeriod' => 'Either sowing period or planting period must be provided.'
+        ])->withInput();
+        }
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $request['image'] = $path;
+        }
 
         Plant::create($request->all());
         return "Plante créée avec succès";
@@ -53,6 +59,7 @@ class PlantController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'image' => 'nullable|image',
             'type' => 'nullable|string|max:255',
             'description' => 'required|string',
             'sowing_period' => 'nullable|string|max:255',
@@ -73,6 +80,11 @@ class PlantController extends Controller
                 'sowingPeriod' => 'Either sowing period or planting period must be provided.',
                 'plantingPeriod' => 'Either sowing period or planting period must be provided.'
             ])->withInput();
+        }
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $request['image'] = $path;
         }
         
         $plant = Plant::find($id);

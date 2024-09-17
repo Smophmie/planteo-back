@@ -11,6 +11,7 @@ class Plant extends Model
 
     protected $fillable = [
         'name',
+        'image',
         'type',
         'description',
         'sowing_period',
