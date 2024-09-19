@@ -99,21 +99,24 @@ class PlantController extends Controller
         return 'La plante a été supprimée';
     }
 
-    public function getPlantsBySowingPeriod(int $month){
+    public function getPlantsByPeriod(int $month, string $periodType){
         $month = '%'.$month.'%';
-        $plants = Plant::where('sowing_period', 'like', $month)->get();
-        return $plants;
-    }
-
-    public function getPlantsByPlantingPeriod(int $month){
-        $month = '%'.$month.'%';
-        $plants = Plant::where('planting_period', 'like', $month)->get();
-        return $plants;
-    }
-
-    public function getPlantsByHarvestPeriod(int $month){
-        $month = '%'.$month.'%';
-        $plants = Plant::where('harvest_period', 'like', $month)->get();
+    
+        switch ($periodType) {
+            case 'sowing':
+                dump('ok');
+                $plants = Plant::where('sowing_period', 'like', $month)->get();
+                break;
+            case 'planting':
+                $plants = Plant::where('planting_period', 'like', $month)->get();
+                break;
+            case 'harvest':
+                $plants = Plant::where('harvest_period', 'like', $month)->get();
+                break;
+            default:
+                return response()->json(['error' => 'Invalid period type'], 400);
+        }
+    
         return $plants;
     }
 }

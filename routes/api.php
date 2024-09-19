@@ -35,9 +35,4 @@ Route::put('/plants/{id}', [PlantController::class, 'update']);
 Route::delete('/plants/{id}', [PlantController::class, 'destroy']);
 
 
-
-Route::get('/plantsbysowingperiod/{month}', [PlantController::class, 'getPlantsBySowingPeriod']);
-
-Route::get('/plantsbyplantingperiod/{month}', [PlantController::class, 'getPlantsByPlantingPeriod']);
-
-Route::get('/plantsbyharvestperiod/{month}', [PlantController::class, 'getPlantsByHarvestPeriod']);
+Route::get('/plantsbyperiod/{month}/{periodType}', [PlantController::class, 'getPlantsByPeriod']);
