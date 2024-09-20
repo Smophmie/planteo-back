@@ -104,7 +104,6 @@ class PlantController extends Controller
     
         switch ($periodType) {
             case 'sowing':
-                dump('ok');
                 $plants = Plant::where('sowing_period', 'like', $month)->get();
                 break;
             case 'planting':
