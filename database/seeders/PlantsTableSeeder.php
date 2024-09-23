@@ -433,8 +433,8 @@ class PlantsTableSeeder extends Seeder
             [
                 'name' => 'Échalotes',
                 'type' => 'Légume',
-                'sowing_period' => '03, 04, 08, 09',
-                'planting_period' => '04, 09, 10',
+                'sowing_period' => '',
+                'planting_period' => '03, 04, 05, 09, 10',
                 'harvest_period' => '07, 08, 09',
                 'soil' => 'Sol léger, bien drainé',
                 'watering' => 'Arrosage modéré, éviter de mouiller les feuilles',

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'is_admin' => 1,
             'password' => 'test',
+            'city' => 'Clermont-Ferrand',
         ]);
     }
 }

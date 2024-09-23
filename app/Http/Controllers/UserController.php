@@ -38,6 +38,7 @@ class UserController extends Controller
                 'confirmed'
             ],
             'password_confirmation' => 'required',
+            'city' => 'required',
         ]);
         try {
             $user = User::create($validatedData);
@@ -105,7 +106,8 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'is_admin' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'city' => 'required'
           ]);
           $user = User::find($id);
           $user->update($request->all());
