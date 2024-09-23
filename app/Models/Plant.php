@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Plant extends Model
 {
@@ -22,4 +24,9 @@ class Plant extends Model
         'exposure',
         'maintenance',
     ];
+
+    public function favoritedBy(): BelongsToMany
+        {
+            return $this->belongsToMany(User::class, 'favorites');
+        }
 }

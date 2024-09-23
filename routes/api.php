@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlantController;
+use App\Http\Controllers\FavoriteController;
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
@@ -19,6 +21,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update']);
 
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+    Route::post('/favorites', [FavoriteController::class, 'store']);
+
+    Route::delete('/favorites', [FavoriteController::class, 'destroy']);
 });
 
 
