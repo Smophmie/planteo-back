@@ -146,6 +146,13 @@ class UserController extends Controller
         ], 401);
     }
 
+    public function getFavorites()
+    {
+        $user = Auth::user();
+        $favorites = $user->favorites()->get();
+        return $favorites;
+    }
+
     public function destroy(string $id)
     {
         $user = User::find($id);
