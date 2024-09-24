@@ -36,6 +36,8 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::get('/plants', [PlantController::class, 'index']);
 
+Route::get('/plantsbyname', [PlantController::class, 'getPlantsByName']);
+
 Route::get('/plants/{id}', [PlantController::class, 'show']);
 
 Route::put('/plants/{id}', [PlantController::class, 'update']);

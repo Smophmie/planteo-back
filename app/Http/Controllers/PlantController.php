@@ -99,6 +99,12 @@ class PlantController extends Controller
         return 'La plante a été supprimée';
     }
 
+    public function getPlantsByName(Request $request){
+        $search = $request->query('search');
+        $plants = Plant::where('name', 'LIKE', "%{$search}%")->get();
+        return response()->json($plants);
+    }
+
     public function getPlantsByPeriod(int $month, string $periodType){
         $month = '%'.$month.'%';
     
