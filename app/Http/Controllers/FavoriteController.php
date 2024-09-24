@@ -28,6 +28,15 @@ class FavoriteController extends Controller
         return response()->json(['message' => 'Plante ajoutée à vos favoris.'], 201);
     }
 
+    public function isFavorite($id)
+    {
+        $user = Auth::user();
+
+        $isFavorite = $user->favorites()->where('plant_id', $id)->exists();
+
+        return response()->json(['isFavorite' => $isFavorite]);
+    }
+
     public function destroy(Request $request)
     {
         $request->validate([
