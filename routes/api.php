@@ -20,6 +20,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::put('/users/{id}', [UserController::class, 'update']);
 
+    Route::put('/users/{id}/toggle-admin', [UserController::class, 'toggleAdminStatus']);
+
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
     Route::get('/favorites', [UserController::class, 'getFavorites']);

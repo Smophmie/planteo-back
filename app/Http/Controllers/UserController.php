@@ -121,7 +121,7 @@ class UserController extends Controller
     public function isAdmin()
     {
         $user = Auth::user();
-        if ($user->admin === 1) {
+        if ($user->is_admin === 1) {
             return true;
         } else {
             return false;
@@ -144,6 +144,20 @@ class UserController extends Controller
             'status' => false,
             'message' => 'User not authenticated',
         ], 401);
+    }
+
+    public function toggleAdminStatus($id)
+    {
+        if (!Auth::user()->is_admin) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
+        $user = User::find($id);
+
+        $user->is_admin = !$user->is_admin;
+
+        $user->save();
+
+        return response()->json($user);
     }
 
     public function getFavorites()
