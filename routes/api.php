@@ -24,6 +24,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
+
+    Route::post('/plants', [PlantController::class, 'store']);
+
+    Route::put('/plants/{id}', [PlantController::class, 'update']);
+
+    Route::delete('/plants/{id}', [PlantController::class, 'destroy']);
+
+
     Route::get('/favorites', [UserController::class, 'getFavorites']);
 
     Route::get('/favorite/{id}', [FavoriteController::class, 'isFavorite']);
@@ -43,10 +51,5 @@ Route::get('/plants', [PlantController::class, 'index']);
 Route::get('/plantsbyname', [PlantController::class, 'getPlantsByName']);
 
 Route::get('/plants/{id}', [PlantController::class, 'show']);
-
-Route::put('/plants/{id}', [PlantController::class, 'update']);
-
-Route::delete('/plants/{id}', [PlantController::class, 'destroy']);
-
 
 Route::get('/plantsbyperiod/{month}/{periodType}', [PlantController::class, 'getPlantsByPeriod']);

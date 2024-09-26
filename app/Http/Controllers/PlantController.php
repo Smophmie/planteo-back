@@ -40,12 +40,14 @@ class PlantController extends Controller
         ])->withInput();
         }
 
+        $data = $request->all();
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
-            $request['image'] = $path;
+            $data['image'] = $path;
         }
 
-        Plant::create($request->all());
+        Plant::create($data);
         return "Plante créée avec succès";
     }
 
@@ -82,13 +84,15 @@ class PlantController extends Controller
             ])->withInput();
         }
 
+        $data = $request->all();
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
-            $request['image'] = $path;
+            $data['image'] = $path;
         }
         
         $plant = Plant::find($id);
-        $plant->update($request->all());
+        $plant->update($data);
         return "La plante a bien été mise à jour.";
     }
 
