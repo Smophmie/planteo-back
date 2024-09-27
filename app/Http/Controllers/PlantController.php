@@ -63,7 +63,7 @@ class PlantController extends Controller
             'name' => 'required',
             'image' => 'nullable|image',
             'type' => 'nullable|string|max:255',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
             'sowing_period' => 'nullable|string|max:255',
             'planting_period' => 'nullable|string|max:255',
             'harvest_period' => 'required|string|max:255',
@@ -71,9 +71,6 @@ class PlantController extends Controller
             'watering' => 'required',
             'exposure' => 'required',
             'maintenance' => 'required',
-        ], [], [
-            'sowingPeriod' => 'sowing period',
-            'plantingPeriod' => 'planting period'
         ]);
 
         if (!$request->filled('sowing_period') && !$request->filled('planting_period')) 
