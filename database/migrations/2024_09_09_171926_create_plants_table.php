@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image');
-            $table->string('type');
+            $table->string('image')->nullable();
+            $table->string('type')->nullable();
             $table->string('description');
-            $table->string('sowing_period');
-            $table->string('planting_period');
+            $table->string('sowing_period')->nullable();
+            $table->string('planting_period')->nullable();
             $table->string('harvest_period');
             $table->string('soil');
             $table->string('watering');
