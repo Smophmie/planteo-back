@@ -42,11 +42,9 @@ class UserController extends Controller
         ]);
         try {
             $user = User::create($validatedData);
-            $token = $user->createToken("API TOKEN")->plainTextToken;
     
             return response()->json([
                 'user' => $user,
-                'token' => $token,
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -68,7 +66,7 @@ class UserController extends Controller
             if($validateUser->fails()){
                 return response()->json([
                     'status' => false,
-                    'message' => 'validation error',
+                    'message' => 'Erreur de validation',
                     'errors' => $validateUser->errors()
                 ], 401);
             }
@@ -89,7 +87,10 @@ class UserController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Utilisateur connecté.',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'is_admin' => $user->is_admin,
+                'name'=> $user->name,
+                'city' => $user->city
             ], 200);
 
         } catch (\Throwable $th) {
