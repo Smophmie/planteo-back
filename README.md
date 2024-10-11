@@ -52,7 +52,6 @@ Ce dépôt contient le code source du back-end de Planteo, un site web qui fourn
 
 Pour démarrer le serveur de développement Laravel, utilisez la commande suivante :
 
-    ```bash
     php artisan serve
 
 ## Auteure
