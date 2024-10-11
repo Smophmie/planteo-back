@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Plant;
+use Cloudinary\Api\Upload\UploadApi;
+use Cloudinary\Configuration\Configuration;
 
 class PlantController extends Controller
 {
@@ -42,12 +44,41 @@ class PlantController extends Controller
 
         $data = $request->all();
 
+        $plant = Plant::create([
+            'name' => $data['name'],
+            'type' => $data['type'],
+            'description' => $data['description'],
+            'sowing_period' => $data['sowing_period'],
+            'planting_period' => $data['planting_period'],
+            'harvest_period' => $data['harvest_period'],
+            'soil' => $data['soil'],
+            'watering' => $data['watering'],
+            'exposure' => $data['exposure'],
+            'maintenance' => $data['maintenance'],
+        ]); 
+
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
-            $data['image'] = $path;
+            Configuration::instance([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key' => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+                'url' => [
+                    'secure' => true 
+                ]
+            ]);
+
+            $filePath = request()->file('image')->getRealPath();
+
+            $uploadResult = (new UploadApi())->upload($filePath, [
+                'folder' => 'plants/' . $plant->id, 
+            ]);
+
+            $plant->update(['image' => $uploadResult['secure_url']]);
         }
 
-        Plant::create($data);
+        // Plant::create($data);
         return "Plante créée avec succès";
     }
 
@@ -83,13 +114,42 @@ class PlantController extends Controller
 
         $data = $request->all();
 
+
+        $plant = Plant::find($id);
+
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
-            $data['image'] = $path;
+            Configuration::instance([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key' => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+                'url' => [
+                    'secure' => true 
+                ]
+            ]);
+
+            $filePath = request()->file('image')->getRealPath();
+
+            $uploadResult = (new UploadApi())->upload($filePath, [
+                'folder' => 'plants/' . $id, 
+            ]);
+
+            $plant->update(['image' => $uploadResult['secure_url']]);
         }
         
-        $plant = Plant::find($id);
-        $plant->update($data);
+        $plant->update([
+            'name' => $data['name'],
+            'type' => $data['type'],
+            'description' => $data['description'],
+            'sowing_period' => $data['sowing_period'],
+            'planting_period' => $data['planting_period'],
+            'harvest_period' => $data['harvest_period'],
+            'soil' => $data['soil'],
+            'watering' => $data['watering'],
+            'exposure' => $data['exposure'],
+            'maintenance' => $data['maintenance'],
+        ]);
         return "La plante a bien été mise à jour.";
     }
 
