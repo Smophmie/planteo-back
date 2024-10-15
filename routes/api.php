@@ -10,8 +10,6 @@ use App\Http\Controllers\FavoriteController;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [UserController::class, 'logout']);
 
-    Route::get('/isadmin', [UserController::class, 'isAdmin']);
-
     Route::get('/connectedUser', [UserController::class, 'connectedUser']);
 
     Route::get('/users', [UserController::class, 'index']);
