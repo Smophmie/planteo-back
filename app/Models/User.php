@@ -71,4 +71,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Plant::class, 'favorites');
     }
 
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
 }

@@ -29,4 +29,9 @@ class Plant extends Model
         {
             return $this->belongsToMany(User::class, 'favorites');
         }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

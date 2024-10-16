@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\EventController;
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -37,6 +38,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/favorites', [FavoriteController::class, 'store']);
 
     Route::delete('/favorites', [FavoriteController::class, 'destroy']);
+
+
+    Route::get('/events', [EventController::class, 'index']);
+    Route::post('/events', [EventController::class, 'store']);
+
 });
 
 
