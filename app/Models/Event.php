@@ -15,7 +15,7 @@ class Event extends Model
         'plant_id',
         'start',
         'end',
-        'comment',
+        'description',
     ];
 
     public function user()

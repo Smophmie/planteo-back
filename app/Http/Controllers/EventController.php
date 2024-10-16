@@ -23,7 +23,7 @@ class EventController extends Controller
             'plant_id' => 'required|exists:plants,id',
             'start' => 'required|date',
             'end' => 'required|date|after_or_equal:start',
-            'comment' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:255',
         ]);
 
         $event = Event::create([
@@ -32,7 +32,7 @@ class EventController extends Controller
             'plant_id' => $request->plant_id,
             'start' => $request->start,
             'end' => $request->end,
-            'comment' => $request->comment,
+            'description' => $request->description,
         ]);
 
         return response()->json($event, 201);
